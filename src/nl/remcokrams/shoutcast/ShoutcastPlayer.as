@@ -57,9 +57,9 @@ package nl.remcokrams.shoutcast
 			MP3Handler
 		]);
 		
-		public static const RESET_PLAYBACK:int = 1;
-		public static const RESET_PROPS:int = 2;
-		public static const RESET_STREAM:int  = 3;
+		private static const RESET_PLAYBACK:int = 1;
+		private static const RESET_PROPS:int = 2;
+		private static const RESET_STREAM:int  = 3;
 		
 		protected var _flvAudioStreamWriter:FLVAudioStreamWriter;
 		protected var _request:URLRequest;
