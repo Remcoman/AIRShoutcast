@@ -1,0 +1,16 @@
+The ShoutcastPlayer plays AAC & MP3 streams by default and can be extended with more formats by using registerAudioFormatHandler.
+Because of plugin and cross domain limitations the player will only work in Adobe AIR.
+
+Usage:
+
+var player:ShoutcastPlayer = new ShoutcastPlayer();
+player.play(streamURL);
+ 
+player.addEventListener(ShoutcastMetadataEvent.METADATA_AVAILABLE, function (e:ShoutcastMetadataEvent):void {
+  trace(e.metadata.StreamTitle);
+});
+
+TODO:
+
+- Make mp3 playback more reliable (sometimes it fails to connect)
+- Optimize byte access by using apparat
