@@ -107,38 +107,6 @@ package nl.remcokrams.shoutcast.audioformat.mp3
 			return false;
 		}
 		
-		private function getSamplesPerFrame():uint {
-			var columnIndex:int, rowIndex:int;
-			
-			switch(layer)
-			{
-				case 1 :
-					rowIndex = 0;
-					break;
-				case 2 :
-					rowIndex = 1;
-					break;
-				case 3 :
-					rowIndex = 2;
-					break;
-			}
-			
-			switch(versionID)
-			{
-				case 1 :
-					columnIndex = 0;
-					break;
-				case 2 :
-					columnIndex = 1;
-					break;
-				case 3 :
-					columnIndex = 2;
-					break;
-			}
-			
-			return SAMPLES_PER_FRAME_TABLE[ rowIndex ][ columnIndex ];
-		}
-		
 		public function clone():MP3Header {
 			var cloneHeader:MP3Header = new MP3Header();
 			

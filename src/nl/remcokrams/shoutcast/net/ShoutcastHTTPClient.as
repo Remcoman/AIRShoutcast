@@ -242,7 +242,7 @@ package nl.remcokrams.shoutcast.net
 		protected function onSocketData(e:ProgressEvent):void {
 			if(_mode < MODE_DATA)
 			{
-				while(_socket.bytesAvailable)
+				readLoop : while(_socket.bytesAvailable)
 				{
 					_responseData += _socket.readUTFBytes(1);
 					
@@ -267,8 +267,8 @@ package nl.remcokrams.shoutcast.net
 								
 								default :
 									close();
-									errorCallback();
-									break;
+									errorCallback(_status);
+									break readLoop;
 							}
 						}
 						else if(icyStatusCheck)
@@ -284,8 +284,8 @@ package nl.remcokrams.shoutcast.net
 								
 								default :
 									close();
-									errorCallback();
-									break;
+									errorCallback(_status);
+									break readLoop;
 							}
 						}
 					}
@@ -328,7 +328,7 @@ package nl.remcokrams.shoutcast.net
 			if(_reconnectMode)
 				planNextReconnect();
 			else
-				errorCallback();
+				errorCallback(-1);
 		}
 	}
 }

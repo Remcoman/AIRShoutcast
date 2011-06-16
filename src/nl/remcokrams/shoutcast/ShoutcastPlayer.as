@@ -323,8 +323,25 @@ package nl.remcokrams.shoutcast
 			}
 		}
 		
-		protected function onSocketError():void {
-			triggerError( ShoutcastPlayerErrors.STREAM_NOT_FOUND ); //TODO Socket error does not mean STREAM_NOT_FOUND
+		protected function onSocketError(status:int):void {
+			var errorCode:int;
+			
+			//translate http error to shoutcast error code
+			switch(status) {
+				case -1 :
+					errorCode = ShoutcastPlayerErrors.SOCKET_ERROR;
+					break;
+				
+				case 404 :
+					errorCode = ShoutcastPlayerErrors.STREAM_NOT_FOUND;
+					break;
+				
+				default : //server returned unknown status (not 200)
+					errorCode = ShoutcastPlayerErrors.SERVER_ERROR;
+					break;
+			}
+			
+			triggerError( errorCode ); //TODO Socket error does not mean STREAM_NOT_FOUND
 		}
 		
 		protected function onSocketResponse(status:int, headers:Vector.<URLRequestHeader>):void {
